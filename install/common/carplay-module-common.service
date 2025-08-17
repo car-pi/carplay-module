@@ -1,0 +1,32 @@
+[Unit]
+Description=CarPlay Module 
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=2
+
+# X11 for the Electron window
+Environment=DISPLAY=:0
+Environment=ELECTRON_DISABLE_GPU_SANDBOX=1
+Environment=CHOKIDAR_USEPOLLING=true
+
+ExecStartPre=/usr/bin/docker rm -f carplay-module-common
+
+ExecStart=/usr/bin/docker run --rm \
+  --name carplay-module-common \
+  --network host \
+  --device /dev/bus/usb:/dev/bus/usb \
+  -e DISPLAY=${DISPLAY} \
+  -e ELECTRON_DISABLE_GPU_SANDBOX=1 \
+  -e CHOKIDAR_USEPOLLING=true \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  -v /opt/car-pi/modules/carplay-module/src:/src \
+  -v carplay_node_modules:/src/node_modules \
+  carplay-module-common:latest
+
+ExecStop=/usr/bin/docker stop carplay-module-common
+
+[Install]
+WantedBy=multi-user.target
