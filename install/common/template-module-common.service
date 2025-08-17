@@ -1,0 +1,15 @@
+[Unit]
+Description=Template Module Common Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker rm -f template-module-common
+ExecStart=/usr/bin/docker run \
+  --name template-module-common \
+  template-module-common
+ExecStop=/usr/bin/docker stop template-module-common
+
+[Install]
+WantedBy=multi-user.target
