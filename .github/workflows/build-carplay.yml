@@ -1,11 +1,11 @@
 name: Build & Publish Carplay Module Image
 
 on:
-  push:
-    branches: [custom_image]
-    paths:
-      - 'docker/**'
-      - '.github/workflows/build-carplay.yml'
+  # push:
+  #   branches: [custom_image]
+  #   paths:
+  #     - 'docker/**'
+  #     - '.github/workflows/build-carplay.yml'
   workflow_dispatch: {}
 
 jobs:
