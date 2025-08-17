@@ -5,7 +5,7 @@ ARG NODE_VERSION=20-bookworm
 ARG TARGETPLATFORM
 ARG TARGETARCH
 
-FROM --platform=$TARGETPLATFORM node:${NODE_VERSION} AS node-base
+FROM node:${NODE_VERSION} AS node-base
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
