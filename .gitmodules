@@ -1,0 +1,3 @@
+[submodule "src/react-carplay"]
+	path = src/react-carplay
+	url = git@github.com:car-pi/react-carplay.git
